@@ -11,24 +11,41 @@ class TodoController extends Controller
     {
         $todo = new Todo();
         $todos = $todo->all();
+        // dd
         
-        return view('todo.index', ['todos' => $todos]);
+        return view('todo.index', ['todoData' => $todos]);
+        // view関数の第一引数と第二引数
     }
+
 
     public function create()
     {
         return view('todo.create');
     }
 
+
     public function store(Request $request)
     {
+        // クラス名と引数が一緒に書かれている場合、そのクラスをインスタンス化したものが引数に入る。(メソッドインジェクション)
+
+        // storeメソッド引数いくつ？
+        // storeメソッド引数データ型、どういうデータ入ってるか？
         $inputs = $request->all();
-        dd($inputs);
+        // dd($inputs);
     
         $todo = new Todo();// 1. todosテーブルの1レコードを表すTodoクラスをインスタンス化
         $todo->fill($inputs);// 2. Todoインスタンスのカラム名のプロパティに保存したい値を代入
         $todo->save();// 3. Todoインスタンスの`->save()`を実行してオブジェクトの状態をDBに保存するINSERT文を実行
 
         return redirect()->route('todo.index');
+    }
+
+
+    public function show($id)
+    {
+        $model = new Todo();
+        $todo = $model->find($id);
+    
+        return view('todo.show', ['todo' => $todo]);
     }
 }
