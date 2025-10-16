@@ -74,4 +74,15 @@ class TodoController extends Controller
 
         return redirect()->route('todo.show', $todo->id);
     }
+
+
+    // TODO: ルートパラメータを引数に受け取る
+    public function delete($id)
+    {
+        // TODO: 削除対象のレコードの情報を持つTodoモデルのインスタンスを取得
+        $todo = Todo::find($id);
+        $todo->delete();
+        // TODO: ToDo一覧画面にリダイレクト
+        return redirect()->route('todo.index');
+    }
 }
