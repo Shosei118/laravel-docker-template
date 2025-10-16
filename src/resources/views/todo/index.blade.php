@@ -10,7 +10,7 @@
           ToDo一覧
         </div>
         <div class="list-group list-group-flush">
-          @foreach ($todoData as $todo)
+          @foreach ($todos as $todo)
             <!-- $todoDataデータ型とどんなデータ入るか -->
             <!-- allメソッドの返り値が入っている -->
             <div class="d-flex align-items-center p-2">
