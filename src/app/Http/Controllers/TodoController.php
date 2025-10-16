@@ -54,10 +54,23 @@ class TodoController extends Controller
 
 
     public function edit($id)
-{
-    // TODO: 編集対象のレコードの情報を持つTodoモデルのインスタンスを取得
-    $todo = Todo::find($id);
-    // TODO: view()を使用して編集画面を表示
-    return view('todo.edit', ['todo' => $todo]);
-}
+    {
+        // TODO: 編集対象のレコードの情報を持つTodoモデルのインスタンスを取得
+        $todo = Todo::find($id);
+        // TODO: view()を使用して編集画面を表示
+        return view('todo.edit', ['todo' => $todo]);
+    }
+
+
+    public function update(Request $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
+    {
+        // リクエストされた値を取得
+        $inputs = $request->all();
+        // 更新対象のデータを取得
+        $todo = Todo::find($id);
+        // 更新したい値の代入とDB更新
+        $todo->fill($inputs)->save();
+
+        return redirect()->route('todo.show', $todo->id);
+    }
 }
