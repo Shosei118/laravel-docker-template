@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use App\Http\Requests\TodoRequest;
 use App\Todo;
 
 class TodoController extends Controller
@@ -30,7 +31,7 @@ class TodoController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(TodoRequest $request)
     {
         // クラス名と引数が一緒に書かれている場合、そのクラスをインスタンス化したものが引数に入る。(メソッドインジェクション)
 
@@ -62,7 +63,7 @@ class TodoController extends Controller
     }
 
 
-    public function update(Request $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
+    public function update(TodoRequest $request, $id) // 第1引数: リクエスト情報の取得　第2引数: ルートパラメータの取得
     {
         // リクエストされた値を取得
         $inputs = $request->all();
