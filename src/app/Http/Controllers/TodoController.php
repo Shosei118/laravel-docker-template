@@ -57,7 +57,7 @@ class TodoController extends Controller
     public function edit($id)
     {
         // TODO: 編集対象のレコードの情報を持つTodoモデルのインスタンスを取得
-        $todo = Todo::find($id);
+        $todo = $this->todo->find($id);
         // TODO: view()を使用して編集画面を表示
         return view('todo.edit', ['todo' => $todo]);
     }
@@ -68,7 +68,7 @@ class TodoController extends Controller
         // リクエストされた値を取得
         $inputs = $request->all();
         // 更新対象のデータを取得
-        $todo = Todo::find($id);
+        $todo = $this->todo->find($id);
         // 更新したい値の代入とDB更新
         $todo->fill($inputs)->save();
 
@@ -80,7 +80,7 @@ class TodoController extends Controller
     public function delete($id)
     {
         // TODO: 削除対象のレコードの情報を持つTodoモデルのインスタンスを取得
-        $todo = Todo::find($id);
+        $todo = $this->todo->find($id);
         $todo->delete();
         // TODO: ToDo一覧画面にリダイレクト
         return redirect()->route('todo.index');
